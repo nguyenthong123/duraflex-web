@@ -249,3 +249,45 @@ document.addEventListener('DOMContentLoaded', () => {
   // Cập nhật mỗi phút
   setInterval(updateWelcomeMessage, 60000);
 });
+
+// Mobile menu toggle
+document.addEventListener('DOMContentLoaded', function() {
+  const menuBtn = document.querySelector('.mobile-menu-btn');
+  const navLinks = document.querySelector('.nav-links');
+
+  menuBtn.addEventListener('click', function() {
+    navLinks.classList.toggle('active');
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', function(event) {
+    if (!event.target.closest('.main-nav')) {
+      navLinks.classList.remove('active');
+    }
+  });
+
+  // Resize handler
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+      navLinks.classList.remove('active');
+    }
+  });
+});
+
+// Add touch support for sliders
+function enableTouchSlider(slider) {
+  let startX;
+  let scrollLeft;
+
+  slider.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  slider.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    const x = e.touches[0].pageX - slider.offsetLeft;
+    const walk = (x - startX) * 2;
+    slider.scrollLeft = scrollLeft - walk;
+  });
+}
