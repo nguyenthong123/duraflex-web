@@ -1224,3 +1224,105 @@ body {
     margin: 6px;
   }
 }
+
+/* iPhone 13 mini specific styles (375 x 812px, 19.5:9 ratio) */
+@media screen and (max-width: 375px) and (min-height: 812px) {
+  /* Container adjustments */
+  .container {
+    padding: 6px;
+    max-width: 375px;
+  }
+
+  /* Product grid - 2 columns */
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    padding: 6px;
+  }
+
+  /* Product cards */
+  .product-card {
+    aspect-ratio: 0.9; /* Adjusted for 19.5:9 ratio */
+  }
+
+  .product-card img {
+    height: 140px;
+    object-fit: contain;
+  }
+
+  /* Text adjustments */
+  .product-card h3 {
+    font-size: 12px;
+    margin: 4px 6px;
+    line-height: 1.2;
+    height: 28px; /* 2 lines of text */
+    overflow: hidden;
+  }
+
+  .product-card .price {
+    font-size: 11px;
+    margin: 4px 6px;
+    font-weight: bold;
+  }
+
+  /* Header adjustments */
+  .site-header {
+    font-size: 13px;
+  }
+
+  .top-bar {
+    padding: 4px 0;
+  }
+
+  .logo img {
+    height: 24px;
+  }
+
+  .nav-links {
+    padding: 8px;
+  }
+
+  /* Button adjustments */
+  .product-card button {
+    width: calc(100% - 12px);
+    margin: 4px 6px;
+    padding: 6px;
+    font-size: 11px;
+  }
+
+  /* Search box */
+  .search-box {
+    width: 90%;
+    margin: 8px auto;
+  }
+
+  .search-box input {
+    font-size: 13px;
+    padding: 6px;
+  }
+  
+  /* Other elements scaling */
+  .contact-info {
+    font-size: 12px;
+    gap: 8px;
+  }
+
+  .social-links img {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Optimize vertical spacing */
+  .section {
+    margin-bottom: 12px;
+  }
+
+  /* Safe area inset padding for iPhone notch */
+  .site-header {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .floating-buttons {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
