@@ -1043,3 +1043,92 @@ body {
     font-size: 13px;
   }
 }
+
+/* Product Grid Layout */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.product-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+/* Responsive Product Grid */
+@media screen and (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .product-card {
+    min-width: 0; /* Allow cards to shrink */
+  }
+
+  .product-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .product-card h3 {
+    font-size: 12px;
+    margin: 5px;
+  }
+
+  .product-card p {
+    font-size: 10px;
+    margin: 5px;
+  }
+
+  .product-card .price {
+    font-size: 11px;
+    margin: 5px;
+  }
+
+  .product-card button {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+}
+
+/* Extra Small Screens (iPhone 12 mini etc) */
+@media screen and (max-width: 375px) {
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5px;
+    padding: 5px;
+  }
+
+  .product-card h3 {
+    font-size: 10px;
+  }
+
+  .product-card p {
+    font-size: 9px;
+  }
+
+  .product-card .price {
+    font-size: 10px;
+  }
+
+  .product-card button {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+
+  /* Scale down entire page for very small screens */
+  body {
+    transform: scale(0.9);
+    transform-origin: top center;
+  }
+}
