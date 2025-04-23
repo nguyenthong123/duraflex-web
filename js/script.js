@@ -352,52 +352,33 @@ window.addEventListener('resize', detectScreenProperties);
 document.addEventListener('DOMContentLoaded', function() {
   const hamburger = document.querySelector('.hamburger-menu');
   const navLinks = document.querySelector('.nav-links');
-  const welcomeBar = document.querySelector('.welcome-bar');
-  let lastScroll = 0;
+  const body = document.body;
 
-  // Toggle menu
-  hamburger.addEventListener('click', function() {
+  hamburger?.addEventListener('click', function() {
     this.classList.toggle('active');
-    navLinks.classList.toggle('active');
-    
+    navLinks?.classList.toggle('active');
+    body.classList.toggle('menu-active'); // Prevent scroll when menu is open
+
     // Animate hamburger icon
     const spans = this.getElementsByTagName('span');
     if (this.classList.contains('active')) {
       spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
       spans[1].style.opacity = '0';
-      spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+      spans[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';
     } else {
       spans[0].style.transform = 'none';
       spans[1].style.opacity = '1';
       spans[2].style.transform = 'none';
     }
-  });
-
-  // Hide welcome bar on scroll down
-  window.addEventListener('scroll', function() {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > lastScroll && currentScroll > 50) {
-      welcomeBar.classList.add('hidden');
-    } else {
-      welcomeBar.classList.remove('hidden');
-    }
-    
-    lastScroll = currentScroll;
   });
 
   // Close menu when clicking outside
-  document.addEventListener('click', function(event) {
-    if (!event.target.closest('.hamburger-menu') && 
-        !event.target.closest('.nav-links')) {
-      hamburger.classList.remove('active');
-      navLinks.classList.remove('active');
-      
-      // Reset hamburger icon
-      const spans = hamburger.getElementsByTagName('span');
-      spans[0].style.transform = 'none';
-      spans[1].style.opacity = '1';
-      spans[2].style.transform = 'none';
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.hamburger-menu') && 
+        !e.target.closest('.nav-links')) {
+      hamburger?.classList.remove('active');
+      navLinks?.classList.remove('active');
+      body.classList.remove('menu-active');
     }
   });
 });
