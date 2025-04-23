@@ -354,28 +354,36 @@ document.addEventListener('DOMContentLoaded', function() {
   const navLinks = document.querySelector('.nav-links');
   const body = document.body;
 
-  hamburger?.addEventListener('click', function() {
+  // Toggle menu
+  hamburger?.addEventListener('click', function(e) {
+    e.stopPropagation(); // Prevent event bubbling
     this.classList.toggle('active');
     navLinks?.classList.toggle('active');
-    body.classList.toggle('menu-active'); // Prevent scroll when menu is open
-
-    // Animate hamburger icon
-    const spans = this.getElementsByTagName('span');
-    if (this.classList.contains('active')) {
-      spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-      spans[1].style.opacity = '0';
-      spans[2].style.transform = 'rotate(-45deg) translate(7px, -7px)';
-    } else {
-      spans[0].style.transform = 'none';
-      spans[1].style.opacity = '1';
-      spans[2].style.transform = 'none';
-    }
+    body.classList.toggle('menu-active');
   });
 
   // Close menu when clicking outside
   document.addEventListener('click', function(e) {
-    if (!e.target.closest('.hamburger-menu') && 
-        !e.target.closest('.nav-links')) {
+    if (!e.target.closest('.nav-links') && 
+        !e.target.closest('.hamburger-menu')) {
+      hamburger?.classList.remove('active');
+      navLinks?.classList.remove('active');
+      body.classList.remove('menu-active');
+    }
+  });
+
+  // Close menu on escape key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      hamburger?.classList.remove('active');
+      navLinks?.classList.remove('active');
+      body.classList.remove('menu-active');
+    }
+  });
+
+  // Close menu when resizing to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
       hamburger?.classList.remove('active');
       navLinks?.classList.remove('active');
       body.classList.remove('menu-active');
