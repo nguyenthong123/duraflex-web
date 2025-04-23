@@ -389,4 +389,32 @@ document.addEventListener('DOMContentLoaded', function() {
       body.classList.remove('menu-active');
     }
   });
+  
+  const productPageMenu = document.querySelector('.product-page .hamburger-menu');
+  const productPageNav = document.querySelector('.product-page .nav-links');
+
+  if (productPageMenu && productPageNav) {
+    productPageMenu.addEventListener('click', function(e) {
+      e.stopPropagation();
+      this.classList.toggle('active');
+      productPageNav.classList.toggle('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.product-page .nav-links') && 
+          !e.target.closest('.product-page .hamburger-menu')) {
+        productPageMenu.classList.remove('active');
+        productPageNav.classList.remove('active');
+      }
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        productPageMenu.classList.remove('active');
+        productPageNav.classList.remove('active');
+      }
+    });
+  }
 });
