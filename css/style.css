@@ -1326,3 +1326,44 @@ body {
     padding-bottom: env(safe-area-inset-bottom);
   }
 }
+
+/* Screen ratio specific styles */
+.ratio-0-46 .product-grid, /* iPhone 13 mini ratio */
+.ratio-0-47 .product-grid {
+  grid-template-columns: repeat(2, 1fr) !important;
+  gap: 8px;
+  padding: 6px;
+}
+
+/* iPhone 13 mini specific */
+.iphone-13-mini .product-card {
+  aspect-ratio: 0.9;
+}
+
+.iphone-13-mini .product-card img {
+  height: 140px;
+  object-fit: contain;
+}
+
+/* Small screen adjustments */
+.small-screen .product-card h3 {
+  font-size: 12px;
+  margin: 4px 6px;
+  line-height: 1.2;
+}
+
+.small-screen .product-card .price {
+  font-size: 11px;
+  margin: 4px 6px;
+}
+
+/* Dynamic font scaling */
+@media screen and (max-width: 768px) {
+  :root {
+    --base-font-size: calc(12px + (16 - 12) * ((100vw - 320px) / (768 - 320)));
+  }
+
+  body {
+    font-size: var(--base-font-size);
+  }
+}

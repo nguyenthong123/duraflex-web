@@ -291,3 +291,57 @@ function enableTouchSlider(slider) {
     slider.scrollLeft = scrollLeft - walk;
   });
 }
+
+// Detect screen size and ratio
+function detectScreenProperties() {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+  const ratio = (width / height).toFixed(2);
+  
+  // Add screen-specific classes to body
+  const body = document.body;
+  body.classList.remove('small-screen', 'medium-screen', 'large-screen');
+  
+  // Clear previous ratio classes
+  body.className = body.className.replace(/\bratio-[\d-]+\b/g, '');
+  
+  // Add new screen size class
+  if (width <= 375) {
+    body.classList.add('small-screen');
+  } else if (width <= 768) {
+    body.classList.add('medium-screen');
+  } else {
+    body.classList.add('large-screen');
+  }
+  
+  // Add ratio class
+  body.classList.add(`ratio-${ratio.replace('.', '-')}`);
+  
+  // Add specific device classes
+  if (width === 375 && height === 812) { // iPhone 13 mini
+    body.classList.add('iphone-13-mini');
+  }
+  
+  // Adjust layout based on ratio
+  adjustLayout(ratio);
+}
+
+// Adjust layout based on screen ratio
+function adjustLayout(ratio) {
+  const productGrid = document.querySelector('.product-grid');
+  if (!productGrid) return;
+  
+  if (ratio < 0.5) { // Very tall screens
+    productGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+  } else if (ratio < 1) { // Portrait mode
+    productGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+  } else if (ratio < 1.5) { // Standard ratio
+    productGrid.style.gridTemplateColumns = 'repeat(3, 1fr)';
+  } else { // Wide screens
+    productGrid.style.gridTemplateColumns = 'repeat(4, 1fr)';
+  }
+}
+
+// Listen for screen changes
+window.addEventListener('load', detectScreenProperties);
+window.addEventListener('resize', detectScreenProperties);
