@@ -1135,3 +1135,92 @@ body {
     transform-origin: top center;
   }
 }
+
+/* Update header styles for mobile */
+@media screen and (max-width: 768px) {
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .top-bar {
+    padding: 5px 0;
+  }
+
+  .top-bar .container {
+    padding: 0 10px;
+  }
+
+  .logo img {
+    height: 30px; /* Smaller logo */
+  }
+
+  .nav-links {
+    background: white;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+}
+
+/* Update product grid for mobile - 2 items per row */
+@media screen and (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns instead of 4 */
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .product-card {
+    aspect-ratio: 0.75; /* Control card height */
+  }
+
+  .product-card img {
+    height: 150px; /* Fixed height for product images */
+    object-fit: cover;
+  }
+
+  .product-card h3 {
+    font-size: 14px;
+    margin: 8px;
+    line-height: 1.2;
+  }
+
+  .product-card .price {
+    font-size: 13px;
+    margin: 8px;
+    color: #ff4444;
+  }
+
+  .product-card button {
+    width: calc(100% - 16px);
+    margin: 8px;
+    padding: 8px;
+  }
+}
+
+/* Extra small screens */
+@media screen and (max-width: 375px) {
+  .product-grid {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .product-card img {
+    height: 120px; /* Even smaller images */
+  }
+
+  .product-card h3 {
+    font-size: 12px;
+    margin: 6px;
+  }
+
+  .product-card .price {
+    font-size: 12px;
+    margin: 6px;
+  }
+}
