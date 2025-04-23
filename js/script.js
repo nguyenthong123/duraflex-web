@@ -231,13 +231,13 @@ function updateWelcomeMessage() {
   let greeting = '';
 
   if (hour >= 5 && hour < 12) {
-    greeting = 'DunVex.com chào buổi sáng...';
+    greeting = 'DunVex.com chào buổi sáng';
   } else if (hour >= 12 && hour < 14) {
-    greeting = 'DunVex.com chào buổi trưa...';
+    greeting = 'DunVex.com chào buổi trưa';
   } else if (hour >= 14 && hour < 18) {
-    greeting = 'DunVex.com chào buổi chiều...';
+    greeting = 'DunVex.com chào buổi chiều';
   } else {
-    greeting = 'DunVex.com chào buổi tối...';
+    greeting = 'DunVex.com chào buổi tối';
   }
 
   if (welcomeMessage) {
