@@ -345,3 +345,38 @@ function adjustLayout(ratio) {
 // Listen for screen changes
 window.addEventListener('load', detectScreenProperties);
 window.addEventListener('resize', detectScreenProperties);
+
+document.addEventListener('DOMContentLoaded', function() {
+  const hamburger = document.querySelector('.hamburger-menu');
+  const navLinks = document.querySelector('.nav-links');
+  const welcomeBar = document.querySelector('.welcome-bar');
+  let lastScroll = 0;
+
+  // Toggle menu
+  hamburger.addEventListener('click', function() {
+    this.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  });
+
+  // Hide welcome bar on scroll down
+  window.addEventListener('scroll', function() {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > lastScroll && currentScroll > 50) {
+      welcomeBar.classList.add('hidden');
+    } else {
+      welcomeBar.classList.remove('hidden');
+    }
+    
+    lastScroll = currentScroll;
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', function(event) {
+    if (!event.target.closest('.hamburger-menu') && 
+        !event.target.closest('.nav-links')) {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+    }
+  });
+});
