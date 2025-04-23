@@ -224,24 +224,21 @@ function sendFeedback(event) {
   document.getElementById('feedbackForm').reset();
 }
 
-// Function to update welcome message based on time of day
 function updateWelcomeMessage() {
-  const welcomeMessage = document.getElementById('welcomeMessage');
   const hour = new Date().getHours();
-  let greeting = '';
-
+  let timeOfDay;
+  
   if (hour >= 5 && hour < 12) {
-    greeting = 'DunVex.com chào buổi sáng';
-  } else if (hour >= 12 && hour < 14) {
-    greeting = 'DunVex.com chào buổi trưa';
-  } else if (hour >= 14 && hour < 18) {
-    greeting = 'DunVex.com chào buổi chiều';
+    timeOfDay = "sáng";
+  } else if (hour >= 12 && hour < 18) {
+    timeOfDay = "chiều";
   } else {
-    greeting = 'DunVex.com chào buổi tối';
+    timeOfDay = "tối";
   }
-
-  if (welcomeMessage) {
-    welcomeMessage.textContent = greeting;
+  
+  const welcomeElement = document.getElementById('welcomeMessage');
+  if (welcomeElement) {
+    welcomeElement.textContent = `DunVex.com chào buổi ${timeOfDay}!`;
   }
 }
 
@@ -352,69 +349,34 @@ window.addEventListener('resize', detectScreenProperties);
 document.addEventListener('DOMContentLoaded', function() {
   const hamburger = document.querySelector('.hamburger-menu');
   const navLinks = document.querySelector('.nav-links');
-  const body = document.body;
+  const welcomeBar = document.querySelector('.welcome-bar');
+  let lastScroll = 0;
 
   // Toggle menu
-  hamburger?.addEventListener('click', function(e) {
-    e.stopPropagation(); // Prevent event bubbling
+  hamburger.addEventListener('click', function() {
     this.classList.toggle('active');
-    navLinks?.classList.toggle('active');
-    body.classList.toggle('menu-active');
+    navLinks.classList.toggle('active');
+  });
+
+  // Hide welcome bar on scroll down
+  window.addEventListener('scroll', function() {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > lastScroll && currentScroll > 50) {
+      welcomeBar.classList.add('hidden');
+    } else {
+      welcomeBar.classList.remove('hidden');
+    }
+    
+    lastScroll = currentScroll;
   });
 
   // Close menu when clicking outside
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.nav-links') && 
-        !e.target.closest('.hamburger-menu')) {
-      hamburger?.classList.remove('active');
-      navLinks?.classList.remove('active');
-      body.classList.remove('menu-active');
+  document.addEventListener('click', function(event) {
+    if (!event.target.closest('.hamburger-menu') && 
+        !event.target.closest('.nav-links')) {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
     }
   });
-
-  // Close menu on escape key
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      hamburger?.classList.remove('active');
-      navLinks?.classList.remove('active');
-      body.classList.remove('menu-active');
-    }
-  });
-
-  // Close menu when resizing to desktop
-  window.addEventListener('resize', function() {
-    if (window.innerWidth > 768) {
-      hamburger?.classList.remove('active');
-      navLinks?.classList.remove('active');
-      body.classList.remove('menu-active');
-    }
-  });
-  
-  const productPageMenu = document.querySelector('.product-page .hamburger-menu');
-  const productPageNav = document.querySelector('.product-page .nav-links');
-
-  if (productPageMenu && productPageNav) {
-    productPageMenu.addEventListener('click', function(e) {
-      e.stopPropagation();
-      this.classList.toggle('active');
-      productPageNav.classList.toggle('active');
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.product-page .nav-links') && 
-          !e.target.closest('.product-page .hamburger-menu')) {
-        productPageMenu.classList.remove('active');
-        productPageNav.classList.remove('active');
-      }
-    });
-
-    // Close menu on escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        productPageMenu.classList.remove('active');
-        productPageNav.classList.remove('active');
-      }
-    });
-  }
 });

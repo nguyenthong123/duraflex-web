@@ -1,0 +1,43 @@
+/* Header Styles */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: white;
+}
+
+.top-bar {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    background: #95c11f;
+    color: white;
+}
+
+/* Mobile styles */
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 50%;
+        background: white;
+        box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        display: block;
+    }
+}
+
+/* Footer Styles */
+.site-footer {
+    background: #2c3e50;
+    color: white;
+    padding: 40px 20px;
+    margin-top: auto;
+}
