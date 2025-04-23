@@ -380,37 +380,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
-
-// Only run on mobile screens
-if (window.innerWidth <= 768) {
-  const hamburger = document.querySelector('.hamburger-menu');
-  const navLinks = document.querySelector('.nav-links');
-  const welcomeBar = document.querySelector('.welcome-bar');
-  let lastScroll = 0;
-
-  // Toggle menu
-  hamburger?.addEventListener('click', function() {
-    navLinks.classList.toggle('active');
-  });
-
-  // Hide welcome bar on scroll
-  window.addEventListener('scroll', function() {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll > lastScroll && currentScroll > 50) {
-      welcomeBar?.classList.add('hidden');
-    } else {
-      welcomeBar?.classList.remove('hidden');
-    }
-    
-    lastScroll = currentScroll;
-  });
-
-  // Close menu when clicking outside
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.hamburger-menu') && 
-        !e.target.closest('.nav-links')) {
-      navLinks?.classList.remove('active');
-    }
-  });
-}

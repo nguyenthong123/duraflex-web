@@ -1565,3 +1565,49 @@ body {
     margin: 6px;
   }
 }
+
+/* Remove duplicate media queries and combine them */
+@media screen and (max-width: 768px) {
+  /* Combine all mobile styles here */
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .hamburger-menu {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 0;
+  }
+
+  .nav-links.active {
+    display: block;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+}
+
+/* Remove duplicate iPhone specific styles and combine them */
+@media screen and (max-width: 375px) {
+  .product-grid {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .product-card img {
+    height: 120px;
+  }
+}
