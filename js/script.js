@@ -224,21 +224,24 @@ function sendFeedback(event) {
   document.getElementById('feedbackForm').reset();
 }
 
+// Function to update welcome message based on time of day
 function updateWelcomeMessage() {
+  const welcomeMessage = document.getElementById('welcomeMessage');
   const hour = new Date().getHours();
-  let timeOfDay;
-  
+  let greeting = '';
+
   if (hour >= 5 && hour < 12) {
-    timeOfDay = "sáng";
-  } else if (hour >= 12 && hour < 18) {
-    timeOfDay = "chiều";
+    greeting = 'DunVex.com chào buổi sáng...';
+  } else if (hour >= 12 && hour < 14) {
+    greeting = 'DunVex.com chào buổi trưa...';
+  } else if (hour >= 14 && hour < 18) {
+    greeting = 'DunVex.com chào buổi chiều...';
   } else {
-    timeOfDay = "tối";
+    greeting = 'DunVex.com chào buổi tối...';
   }
-  
-  const welcomeElement = document.getElementById('welcomeMessage');
-  if (welcomeElement) {
-    welcomeElement.textContent = `DunVex.com chào buổi ${timeOfDay}!`;
+
+  if (welcomeMessage) {
+    welcomeMessage.textContent = greeting;
   }
 }
 
